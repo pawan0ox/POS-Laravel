@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('title', 'Orders List')
 @section('content-header', 'Order List')
 @section('content-actions')
@@ -38,6 +37,8 @@
                     <th>Status</th>
                     <th>Remain.</th>
                     <th>Created At</th>
+                    <th>Pay</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +61,39 @@
                     </td>
                     <td>{{config('settings.currency_symbol')}} {{number_format($order->total() - $order->receivedAmount(), 2)}}</td>
                     <td>{{$order->created_at}}</td>
+{{--                    <td>--}}
+{{--                        <div id="pay">--}}
+{{--                            <button id="pay-button-{{ $order->id }}" class="btn btn-primary" onclick="payOrder({{ $order->id }})"> Pay </button>--}}
+{{--                            <meta name="csrf-token" content="{{ csrf_token() }}">--}}
+{{--                            <script>--}}
+{{--                                function payOrder(orderId) {--}}
+{{--                                    // Get the CSRF token from the meta tag in the head section--}}
+{{--                                    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');--}}
+
+{{--                                    // Send an AJAX request to pay the order--}}
+{{--                                    var xhr = new XMLHttpRequest();--}}
+{{--                                    xhr.open('POST', '/orders/' + orderId + '/pay');--}}
+{{--                                    xhr.setRequestHeader('Content-Type', 'application/json');--}}
+{{--                                    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);--}}
+{{--                                    xhr.onload = function() {--}}
+{{--                                        if (xhr.status === 200) {--}}
+{{--                                            // The payment was successful, reload the page to show the updated order status--}}
+{{--                                            location.reload();--}}
+{{--                                        } else {--}}
+{{--                                            // There was an error with the payment, show an error message--}}
+{{--                                            alert('There was an error processing the payment. Please try again later.');--}}
+{{--                                        }--}}
+{{--                                    };--}}
+{{--                                    xhr.send(JSON.stringify({--}}
+{{--                                        _token: csrfToken,--}}
+{{--                                        amount: parseFloat(prompt('Enter the amount to pay:', 0)),--}}
+{{--                                    }));--}}
+{{--                                }--}}
+{{--                            </script>--}}
+
+{{--                        </div>--}}
+{{--                    </td>--}}
+
                 </tr>
                 @endforeach
             </tbody>

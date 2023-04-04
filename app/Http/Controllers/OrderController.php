@@ -52,4 +52,15 @@ class OrderController extends Controller
         ]);
         return 'success';
     }
+    public function pay(Order $order, Request $request)
+    {
+        $order->update([
+            'received_amount' => $request->amount,
+        ]);
+
+        return response()->json([
+            'message' => 'Payment successful',
+        ]);
+    }
+
 }
